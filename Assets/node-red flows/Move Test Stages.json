@@ -1,0 +1,175 @@
+[
+    {
+        "id": "be1524afdebbaca8",
+        "type": "tab",
+        "label": "Move Test Stages",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c6a1a0851dba7812",
+        "type": "mqtt out",
+        "z": "be1524afdebbaca8",
+        "name": "Send MQTT Msg",
+        "topic": "unity/machine",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "87ef62a031489faf",
+        "x": 450,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "7639b7b9c174fa06",
+        "type": "inject",
+        "z": "be1524afdebbaca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "unity/machine",
+        "payload": "Home",
+        "payloadType": "str",
+        "x": 130,
+        "y": 240,
+        "wires": [
+            [
+                "c6a1a0851dba7812"
+            ]
+        ]
+    },
+    {
+        "id": "efbd13cbd9b24c28",
+        "type": "inject",
+        "z": "be1524afdebbaca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "unity/machine",
+        "payload": "TeachPoint1",
+        "payloadType": "str",
+        "x": 150,
+        "y": 300,
+        "wires": [
+            [
+                "c6a1a0851dba7812"
+            ]
+        ]
+    },
+    {
+        "id": "e131cbd58e0ff209",
+        "type": "inject",
+        "z": "be1524afdebbaca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "unity/machine",
+        "payload": "TeachPoint2",
+        "payloadType": "str",
+        "x": 150,
+        "y": 360,
+        "wires": [
+            [
+                "c6a1a0851dba7812"
+            ]
+        ]
+    },
+    {
+        "id": "62e4bf1a984c70e3",
+        "type": "inject",
+        "z": "be1524afdebbaca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "unity/machine",
+        "payload": "MaxExtent",
+        "payloadType": "str",
+        "x": 150,
+        "y": 420,
+        "wires": [
+            [
+                "c6a1a0851dba7812"
+            ]
+        ]
+    },
+    {
+        "id": "87ef62a031489faf",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
