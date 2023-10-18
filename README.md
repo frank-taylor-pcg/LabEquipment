@@ -29,4 +29,15 @@ A place for shaders that will be used to render special effects. The current sha
 Currently only contains a bitmap font I plan to use with the text shader
 
 ### Setting up node-red to send messages
-To communicate with this scene via MQTT you can use node-red to send the messages. I've included a folder with a JSON export of a very simple flow that sends the appropriate messages.  You should be able to import the flow into node-red and get it working pretty quickly.  If that doesn't work, however you can recreate the flow very quickly by adding 4 Inject nodes.  For each Inject node, double click it to open the properties and change the msg.payload type to string by clicking the dropdown on the right-side box (it looks like msg.payload = [Click this box]). Set the values to the 4 inject nodes to "Home", "TeachPoint1", "TeachPoint2", and "MaxExtents" (case-insensitive).
+To communicate with this scene via MQTT you can use node-red to send the messages. I've included a folder with a JSON export of a very simple flow that sends the appropriate messages. If you are unable to import this flow into node-red I've included a step-by-step below.
+
+### Set up the node-red AxisTesting flow
+Start by adding 4 `inject` nodes.  For each `inject` node, double click it to open the properties and change the `msg.payload` type to `string` by clicking the dropdown on the right-side box (it looks like msg.payload = [Click this box]). Set the values to the 4 `inject` nodes to "Home", "TeachPoint1", "TeachPoint2", and "MaxExtents" (case-insensitive).
+
+[`inject` setup image](inject_setup.png)
+
+After the `inject` nodes are added, drag and drop an `mqtt out` node into the flow. Double-click it to open the properties and set the server to `localhost:1883` (note that the port may be different if you're using a different broker). Set the Topic to `unity/machine` (might be case sensitive, I haven't tested it) and everything else can stay the default.
+
+[`mqtt out` setup image](mqtt_out_setup.png)
+
+Now that you've created all of the nodes, simply wire the outputs from the `inject` nodes to the input of the `mqtt out` node and deploy your changes with the red Deploy button in the upper right of the node-red UI. Start the AxisTesting scene and you should now be able to control the stages by click the little square buttons on the left side of each `inject` node.
