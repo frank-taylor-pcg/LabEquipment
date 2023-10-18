@@ -20,24 +20,41 @@ public class TrayElevator : MonoBehaviour
 	private int nextTrayIndex = 0;
 	private float currentWaitTime = 0;
 	private OperationState State =	OperationState.Idle;
+	private bool atTopReported = false;
 	
 	// Update is called once per frame
 	void Update()
 	{
+		if (transform.position.y >= UpperLimit)
+		{
+			if (!atTopReported)
+			{
+				print("Reached vertical limit");
+				atTopReported = true;
+			}
+			return;
+		}
+		
+		transform.position += new Vector3(0f, 0.5f * Time.deltaTime, 0f);
+	}
+	
+	// Doesn't do anything yet
+	private void HandleStates()
+	{
 		switch (State)
 		{
-			case OperationState.Initializing:
+		case OperationState.Initializing:
 			{
 				HomeTrayElevator();
 				break;
 			}
-			case OperationState.Running:
+		case OperationState.Running:
 			{
 				ScanTrayBarcodes();
 				break;
 			}
-			case OperationState.Idle:
-			default:
+		case OperationState.Idle:
+		default:
 			{
 				// Just wait around doing nothing
 				break;
