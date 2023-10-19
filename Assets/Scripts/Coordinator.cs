@@ -15,7 +15,7 @@ public class Coordinator : MonoBehaviour
 	
 	ManagedMqttClient _client = new ManagedMqttClient();
 	
-	private readonly List<string> _subscribeTopics = new()
+	private readonly List<string> _subscribeTopics = new List<string>()
 	{
 		"unity/machine",
 	};

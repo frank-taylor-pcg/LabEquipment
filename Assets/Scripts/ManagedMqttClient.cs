@@ -11,6 +11,10 @@ public class ManagedMqttClient
 	private MqttFactory? _factory;
 	private IMqttClient? _client;
 	private MqttClientOptions? _options;
+	
+	// I modified the Console.WriteLines I had in here to just add to this. I'm not sure the best way to handle that,
+	// but at least this way the message is viewable if I need it.
+	public string Message { get; set; }
 
 	public bool Initialize()
 	{
@@ -20,7 +24,7 @@ public class ManagedMqttClient
 			.WithTcpServer("127.0.0.1")
 			.Build();
 
-		return _factory is not null && _client is not null && _options is not null;
+		return _factory != null && _client != null && _options != null;
 	}
 
 	public bool IsConnected => _client?.IsConnected ?? false;
@@ -33,13 +37,15 @@ public class ManagedMqttClient
 
 		try
 		{
-			using CancellationTokenSource timeoutToken = new(TimeSpan.FromMilliseconds(milliseconds));
-			return _client.ConnectAsync(_options, timeoutToken.Token);
-		}
-			catch (OperationCanceledException)
+			using(CancellationTokenSource timeoutToken = new CancellationTokenSource(TimeSpan.FromMilliseconds(milliseconds)))
 			{
-				Console.WriteLine("Timeout when connecting to MQTT broker");
+				return _client.ConnectAsync(_options, timeoutToken.Token);
 			}
+		}
+		catch (OperationCanceledException)
+		{
+			Message = "Timeout when connecting to MQTT broker";
+		}
 
 		return Task.FromResult(new MqttClientConnectResult());
 	}
@@ -55,7 +61,7 @@ public class ManagedMqttClient
 	{
 		if (!IsConnected)
 		{
-			Console.WriteLine("Can't publish a message because the client is not connected!");
+			Message = "Can't publish a message because the MQTT client is not connected!";
 			return;
 		}
 
@@ -81,6 +87,6 @@ public class ManagedMqttClient
 
 		await result;
 
-		Console.WriteLine($"MqttClient successfully subscribed to the [{topic}] topic");
+		Message = $"MqttClient successfully subscribed to the [{topic}] topic";
 	}
 }
